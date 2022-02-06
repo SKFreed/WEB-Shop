@@ -121,10 +121,14 @@ namespace WEB_Shop_Ajax.Controllers
                     {
                         HistoryCartJson oldhistory = JsonSerializer.Deserialize<HistoryCartJson>(oldhistoryjson);
                         HistoryCartJson History = JsonSerializer.Deserialize<HistoryCartJson>(HistoryJson);
-                       // oldhistory.History.Add(History.History.IndexOf(1);
-                        /*var result = oldhistory.Concat(History);
-                        var newHistory = JsonSerializer.Serialize(result);
-                        manager.History = newHistory;*/
+                        for(int i = 0; i < History.History.Count; i++)
+                        {
+                            oldhistory.History.Add(History.History[i]);
+                        }
+
+                        
+                        var newHistory = JsonSerializer.Serialize(oldhistory);
+                        manager.History = newHistory;
                     }
                     else
                     {

@@ -107,25 +107,3 @@
            page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>
 </div>
 
-
-@*<div class="outq"></div>
-<script id="out-data" type="text/x-jsrender">
-
-    {{for Response}}
-    <div class="card">
-            {{for image ~brand=brand ~model=model}}
-              <img src="Images/{{:~brand}}/{{:~model}}/{{:img}}" class="card-img-top" alt="...">
-            {{/for}} 
-        <div class="card-body">
-            <h5 class="card-title">{{:model}}</h5>
-            <p class="card-text">{{:description}}</p>
-            <a href="/Products/Edit/{{:id}}" class="btn btn-primary">&#9998;</a>
-            <a href="/Products/Details/{{:id}}" class="btn btn-primary">Подробнее</a>
-            <a href="/Products/Delete/{{:id}}" class="btn btn-danger">Удалить</a>
-        </div>
-    </div>
-
-    {{/for}}
-  
-</script>
-*@

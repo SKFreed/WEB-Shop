@@ -207,8 +207,13 @@
         }
         if (cartSum == 0) {
             $(".cart-href").find("span").html("");
+            $(".clear-cart").hide();
+            $(".arrange").hide();
+            $(".cart_content").html('В корзине пусто!');
         } else {
             $(".cart-href").find("span").append(cartSum);
+            $(".clear-cart").show();
+            $(".arrange").show();
         }
 
     }
@@ -227,7 +232,7 @@
             $(this).find("span").append("^");
             $(this).find("span").css("transform", "rotate(180deg)")
         }
-        /*.parents("p")*/
+        
     })
     //----------------------------------------------------Фильтрация------------------------------------------------------------
     
@@ -243,7 +248,7 @@
         })
     })
     //----------------------------------------------------Модальное окно в Cart------------------------------------------------------------
-   
+   //Открыть/закрыть
     const btns = document.querySelectorAll('.arrange');
     const modalOverlay = document.querySelector('.modal-overlay ');
     const modals = document.querySelectorAll('.modal-iside');
@@ -260,8 +265,8 @@
             modalOverlay.classList.add('modal-overlay--visible');
         });
     });
-
-    modalOverlay.addEventListener('click', (e) => {
+    if (modalOverlay != null) {
+        modalOverlay.addEventListener('click', (e) => {
         console.log(e.target);
 
         if (e.target == modalOverlay) {
@@ -271,8 +276,11 @@
             });
         }
     });
-   
+
+    }
     
+   
+    //валидация содержимого модального окна
 
     $("form[name='ArrangeOrder']").validate({
         // Specify validation rules
@@ -289,14 +297,20 @@
         messages: {
             UserFirstName: "Please enter your firstname",
             UserSurName: "Please enter your lastname",
-            HomeAdress: "Please enter a valid address"
+            HomeAdress: "Please enter a valid address",
+            
         },
         // Make sure the form is submitted to the destination defined
         // in the "action" attribute of the form when valid
         submitHandler: function (form) {
             form.submit();
+            //чистка корзины
+            /*localStorage.removeItem('cart');
+            cartCont.innerHTML = 'Корзина очишена.';
+            cartSumInfo();*/
         }
     });
+    // Составление данных о покупаемы товарах и запись их в json , передача в input с типом hidden
     $(".ArrangeOrder").click(function () {
         var cartData = getCartData()
         var arr = [];
